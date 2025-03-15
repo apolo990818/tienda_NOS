@@ -15,23 +15,81 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: #f5f7fa;
         }
+
+        /* Navbar con sombra y transición */
         .navbar {
-            background-color:rgb(39, 66, 82) !important;
+            background: linear-gradient(135deg, rgb(39, 66, 82), rgb(27, 45, 63));
+            transition: background 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .navbar a {
             color: #ffffff !important;
+            font-weight: bold;
         }
+
+        /* Botón toggle mejorado */
+        .menu-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s ease-in-out;
+        }
+        .menu-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .menu-icon span {
+            position: absolute;
+            width: 30px;
+            height: 4px;
+            background: white;
+            border-radius: 4px;
+            transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        .menu-icon span:nth-child(1) {
+            transform: translateY(-10px);
+        }
+        .menu-icon span:nth-child(3) {
+            transform: translateY(10px);
+        }
+        .menu-icon.active span:nth-child(1) {
+            transform: translateY(0) rotate(45deg);
+        }
+        .menu-icon.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu-icon.active span:nth-child(3) {
+            transform: translateY(0) rotate(-45deg);
+        }
+
+        /* Sidebar con fondo desenfocado */
         .offcanvas {
-            background-color: #ffffff;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+        }
+        
+        /* Efecto en los enlaces del menú */
+        .list-group-item {
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
         }
         .list-group-item a {
             text-decoration: none;
-            color:rgb(27, 38, 51);
+            color: rgb(39, 66, 82);
+            transition: color 0.3s ease-in-out;
         }
         .list-group-item:hover {
-            background-color: #f1f1f1;
+            background: rgb(220, 230, 240);
+            transform: translateX(5px);
         }
     </style>
 </head>
@@ -40,14 +98,14 @@
         <!-- Navbar -->
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <button class="btn btn-light me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Tienda Online') }}</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <!-- Botón toggle con animación -->
+                <div class="menu-icon" id="menuToggle" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
                 
+                <a class="navbar-brand" href="{{ url('/') }}">{{ config('app.name', 'Tienda Online') }}</a>
             </div>
         </nav>
 
@@ -75,5 +133,21 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script para animación del menú -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuToggle = document.getElementById("menuToggle");
+            const offcanvasSidebar = document.getElementById("offcanvasSidebar");
+
+            menuToggle.addEventListener("click", function () {
+                this.classList.toggle("active");
+            });
+
+            offcanvasSidebar.addEventListener("hidden.bs.offcanvas", function () {
+                menuToggle.classList.remove("active");
+            });
+        });
+    </script>
 </body>
 </html>
