@@ -120,7 +120,7 @@
                     <li class="list-group-item"><a href="/">Inicio</a></li>
                     <li class="list-group-item"><a href="catalogo">Catálogo</a></li>
                     <li class="list-group-item"><a href="carrito">Carrito</a></li>
-                    <li class="list-group-item"><a href="#">Mis Órdenes</a></li>
+                   <!-- <li class="list-group-item"><a href="orden">Mis Órdenes</a></li> -->
                 </ul>
             </div>
         </div>

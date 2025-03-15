@@ -3,6 +3,11 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductoController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\OrderController;
+
+Route::get('/orden', [OrderController::class, 'index']);
+Route::get('/ordenes/{id}', [OrderController::class, 'show'])->name('ordenes.show');
+
 
 Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
 Route::get('/carrito', [CarritoController::class, 'verCarrito'])->name('carrito.ver');

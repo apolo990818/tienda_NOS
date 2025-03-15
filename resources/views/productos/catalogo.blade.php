@@ -6,11 +6,11 @@
         @foreach($productos as $producto)
             <div class="col-md-4">
                 <div class="card">
-                    @if($producto->image)
-                        <img src="{{ asset('storage/' . $producto->image) }}" class="card-img-top" alt="{{ $producto->nombre }}">
-                    @else
-                        <img src="{{ asset('images/default.png') }}" class="card-img-top" alt="Sin imagen">
-                    @endif
+                @if($producto->image)
+                    <img src="{{ asset('storage/' . $producto->image) }}" alt="{{ $producto->nombre }}" width="100">
+                @else
+                    Sin imagen
+                @endif
                     <div class="card-body">
                         <h5 class="card-title">{{ $producto->nombre }}</h5>
                         <p class="card-text">{{ $producto->descripcion }}</p>
