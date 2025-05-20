@@ -9,7 +9,9 @@ return new class extends Migration
     public function up()
 {
     Schema::table('orders', function (Blueprint $table) {
-        $table->string('session_id')->nullable()->after('estado'); // Agrega la columna
+       // $table->string('session_id')->nullable()->after('estado'); // Agrega la columna
+       $table->string('session_id')->nullable();
+
     });
 }
 
